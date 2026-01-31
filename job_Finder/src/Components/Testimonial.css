@@ -1,0 +1,79 @@
+.testimonial {
+  padding: 120px 20px;
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.testimonial-card {
+  max-width: 700px;
+  text-align: center;
+}
+
+/* PROFILE IMAGE */
+.profile-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 25px;
+}
+
+.profile-wrapper img {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* QUOTE ICON */
+.quote-icon {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: #ff2b6d;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 6px 10px;
+  border-radius: 50%;
+}
+
+/* NAME */
+.testimonial-card h4 {
+  font-size: 18px;
+  color: #2c2c2c;
+  margin-bottom: 5px;
+}
+
+/* DESIGNATION */
+.designation {
+  display: block;
+  font-size: 14px;
+  color: #8a8a8a;
+  margin-bottom: 30px;
+}
+
+/* TEXT */
+.testimonial-text {
+  font-size: 18px;
+  font-style: italic;
+  line-height: 1.8;
+  color: #555;
+  margin-bottom: 40px;
+}
+
+/* DOTS */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  background: #ccc;
+  border-radius: 50%;
+}
+
+.dot.active {
+  background: #ff2b6d;
+}

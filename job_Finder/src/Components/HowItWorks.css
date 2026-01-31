@@ -1,0 +1,64 @@
+
+.how-it-works {
+  padding: 10px 80px;
+  background: #24308f;
+  text-align: center;
+  color: #ffffff;
+  background-image: radial-gradient(
+      rgba(255, 255, 255, 0.06) 1px,
+      transparent 1px
+    );
+  background-size: 40px 40px;
+}
+
+
+.process-subtitle {
+  color: #ff2b6d;
+  font-size: 12px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.process-title {
+  font-size: 40px;
+  margin-bottom: 70px;
+}
+.process-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.process-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 10px 30px;
+  border-radius: 6px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.process-card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.08);
+}
+.process-icon {
+  font-size: 48px;
+  margin-bottom: 25px;
+}
+.process-card h4 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.process-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #d3d6ff;
+}
+@media (max-width: 992px) {
+  .process-cards {
+    grid-template-columns: 1fr;
+  }
+
+  .how-it-works {
+    padding: 80px 30px;
+  }
+}

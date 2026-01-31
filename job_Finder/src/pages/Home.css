@@ -1,0 +1,167 @@
+
+.hero {
+  position: relative;
+  min-height: 70vh;
+  padding: 100px 80px;
+  background-color: #eef1ff;
+  background-image: url("../assets/h1_hero.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+}
+.hero-content {
+  max-width: 650px;
+}
+
+.hero-content h1 {
+  font-size: 52px;
+  font-weight: 700;
+  color: #243b7b;
+  line-height: 1.25;
+  margin-bottom: 40px;
+}
+.search-box {
+  display: flex;
+  background: #ffffff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.12);
+}
+
+.search-box input {
+  border: none;
+  padding: 2px 22px;
+  width: 260px;
+  font-size: 14px;
+  outline:#ff2b6d;
+  
+}
+
+.search-box input::placeholder {
+  color: #777;
+}
+.search-box button {
+  background: #ff2b6d;
+  color: #ffffff;
+  border: none;
+  padding: 18px 45px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+/* ==============================
+   HERO RESPONSIVE
+============================== */
+
+/* TABLET */
+@media (max-width: 992px) {
+  .hero {
+    padding: 60px 30px;
+  }
+
+  .hero-left h1 {
+    font-size: 40px;
+  }
+
+  .hero-img {
+    width: 320px;
+  }
+
+  .search-box input {
+    width: 180px;
+  }
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .hero {
+    padding: 70px 20px;
+    text-align: center;
+    background: linear-gradient(180deg, #eef1ff 0%, #f9faff 100%);
+  }
+
+  .hero-left h1 {
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 25px;
+    color: #1f3c88;
+  }
+
+  .search-box {
+    display: flex;
+    flex-direction: column;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0px 12px 35px rgba(31, 60, 136, 0.15);
+    animation: fadeUp 0.6s ease-in-out;
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 16px;
+    font-size: 15px;
+    border: none;
+    border-bottom: 1px solid #eee;
+  }
+
+  .search-box input:last-of-type {
+    border-bottom: none;
+  }
+
+  .search-box input:focus {
+    background: #f5f7ff;
+  }
+
+  .search-box button {
+    background: linear-gradient(135deg, #ff2b6d, #ff5f8d);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .search-box button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 8px 20px rgba(255, 43, 109, 0.4);
+  }
+
+  .hero-right {
+    margin-top: 35px;
+  }
+
+  .hero-img {
+    width: 240px;
+    margin: auto;
+    border-radius: 16px;
+    box-shadow: 0px 15px 35px rgba(0,0,0,0.15);
+  }
+
+  .pattern {
+    display: none;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .hero-left h1 {
+    font-size: 26px;
+  }
+}
+
+/* Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
