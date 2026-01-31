@@ -16,7 +16,7 @@ function Register() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => { // Added async
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -24,12 +24,31 @@ function Register() {
       return;
     }
 
-    console.log("Registered User:", formData);
+    try {
+      // Logic from image_b13795.png
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          password: formData.password
+        }),
+      });
 
-    alert("Registration Successful!");
+      const data = await response.json();
 
-    // 👉 Redirect to Login page
-    navigate("/login");
+      if (response.ok) {
+        console.log("Success:", data);
+        alert("Registration Successful!");
+        navigate("/login");
+      } else {
+        alert(data.message || "Registration failed");
+      }
+    } catch (error) {
+      console.error("Error connecting to backend:", error);
+      alert("Server error. Is your backend running?");
+    }
   };
 
   return (
@@ -43,6 +62,7 @@ function Register() {
             type="text"
             name="name"
             placeholder="Full Name"
+            value={formData.name}
             onChange={handleChange}
             required
           />
@@ -50,6 +70,7 @@ function Register() {
             type="email"
             name="email"
             placeholder="Email Address"
+            value={formData.email}
             onChange={handleChange}
             required
           />
@@ -57,6 +78,7 @@ function Register() {
             type="password"
             name="password"
             placeholder="Password"
+            value={formData.password}
             onChange={handleChange}
             required
           />
@@ -64,6 +86,7 @@ function Register() {
             type="password"
             name="confirmPassword"
             placeholder="Confirm Password"
+            value={formData.confirmPassword}
             onChange={handleChange}
             required
           />

@@ -1,83 +1,56 @@
+import { useState, useEffect } from "react"; // Added hooks
 import "./FeaturedJobs.css";
 
-import ziggoLogo from "../assets/job1.png";
-import elisaLogo from "../assets/job2.png";
-import rostelecomLogo from "../assets/job3.png";
-import veoliaLogo from "../assets/job4.png";
-
-const jobs = [
-  {
-    company: "Ziggo",
-    title: "Digital Marketer",
-    agency: "Creative Agency",
-    location: "Athens, Greece",
-    salary: "$3500 - $4000",
-    type: "Full Time",
-    time: "7 hours ago",
-    logo: ziggoLogo
-  },
-  {
-    company: "Elisa",
-    title: "Digital Marketer",
-    agency: "Creative Agency",
-    location: "Athens, Greece",
-    salary: "$3500 - $4000",
-    type: "Full Time",
-    time: "7 hours ago",
-    logo: elisaLogo
-  },
-  {
-    company: "Rostelecom",
-    title: "Digital Marketer",
-    agency: "Creative Agency",
-    location: "Athens, Greece",
-    salary: "$3500 - $4000",
-    type: "Full Time",
-    time: "7 hours ago",
-    logo: rostelecomLogo
-  },
-  {
-    company: "Veolia",
-    title: "Digital Marketer",
-    agency: "Creative Agency",
-    location: "Athens, Greece",
-    salary: "$3500 - $4000",
-    type: "Full Time",
-    time: "7 hours ago",
-    logo: veoliaLogo
-  }
-];
-
 function FeaturedJobs() {
+  const [activeJobs, setActiveJobs] = useState([]); // State for dynamic jobs
+
+  useEffect(() => {
+    // Fetch logic from your guide (image_b12570.png)
+    fetch("http://localhost:5000/api/jobs")
+      .then((res) => res.json())
+      .then((data) => {
+        // Take only the first 4 jobs for the "Featured" section
+        setActiveJobs(data.slice(0, 4)); 
+      })
+      .catch((err) => console.error("Error fetching featured jobs:", err));
+  }, []);
+
   return (
     <section className="featured-jobs">
       <h2>Featured Jobs</h2>
 
-      {jobs.map((job, index) => (
-        <div className="job-card">
-  <div className="job-left">
-    <div className="logo-box">
-      <img src={job.logo} alt={job.company} />
-    </div>
+      {activeJobs.length > 0 ? (
+        activeJobs.map((job, index) => (
+          <div key={job._id || index} className="job-card">
+            <div className="job-left">
+              <div className="logo-box">
+                {/* Use the logo URL from the database or a default placeholder */}
+                <img src={job.logo || "https://via.placeholder.com/50"} alt={job.company} />
+              </div>
 
-    <div className="job-info">
-      <h4>{job.title}</h4>
-      <p>{job.agency}</p>
+              <div className="job-info">
+                <h4>{job.title}</h4>
+                <p>{job.company} - {job.agency || "Direct Hire"}</p>
 
-      <div className="job-meta">
-        <span>📍 {job.location}</span>
-        <span>{job.salary}</span>
-      </div>
-    </div>
-  </div>
+                <div className="job-meta">
+                  <span>📍 {job.location}</span>
+                  <span>{job.salary}</span>
+                </div>
+              </div>
+            </div>
 
-  <div className="job-right">
-    <span className="job-type">{job.type}</span>
-    <div className="job-time">{job.time}</div>
-  </div>
-</div>
-
-      ))}
+            <div className="job-right">
+              <span className="job-type">{job.type}</span>
+              <div className="job-time">
+                {/* Logic to calculate time ago can be added here */}
+                {job.createdAt ? new Date(job.createdAt).toLocaleDateString() : "Just now"}
+              </div>
+            </div>
+          </div>
+        ))
+      ) : (
+        <p>No featured jobs available right now.</p>
+      )}
     </section>
   );
 }

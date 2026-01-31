@@ -17,9 +17,9 @@ function Footer() {
         {/* CONTACT */}
         <div className="footer-col">
           <h4>CONTACT INFO</h4>
-          <p>Address : Trinity College of Engineering and Research, Pune.</p>
-          <p>Phone : +9307174929</p>
-          <p>Email : sakshipawar72004@gmail.com</p>
+          <p>Address : Pune</p>
+          <p>Phone : +91 </p>
+          <p>Email : admin@gmail.com</p>
         </div>
 
         {/* LINKS */}
@@ -54,8 +54,7 @@ function Footer() {
       {/* BOTTOM */}
       <div className="footer-bottom">
         <p >
-          Copyright ©2026 All rights reserved | This template is made with ❤️ by &nbsp;
-          <span>Sakshi Pawar</span>
+          Copyright ©2026 All rights reserved !!
         </p>
 
         

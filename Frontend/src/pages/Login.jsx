@@ -14,17 +14,36 @@ function Login() {
     setLoginData({ ...loginData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // simple validation (later replace with backend)
-    if (loginData.email && loginData.password) {
-      alert("Login Successful!");
+    try {
+      // Integration of fetch logic from guide
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: loginData.email,
+          password: loginData.password
+        }),
+      });
 
-      // ✅ Redirect to Home Page
-      navigate("/");
-    } else {
-      alert("Invalid credentials");
+      const data = await response.json();
+
+      if (response.ok) {
+        // Store the token for authenticated sessions
+        localStorage.setItem("token", data.token);
+        
+        alert("Login Successful!");
+        
+        // ✅ Redirect to Home Page
+        navigate("/");
+      } else {
+        alert(data.message || "Invalid credentials");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Server error. Please check if your backend is running.");
     }
   };
 
@@ -39,6 +58,7 @@ function Login() {
             type="email"
             name="email"
             placeholder="Email Address"
+            value={loginData.email}
             onChange={handleChange}
             required
           />
@@ -46,6 +66,7 @@ function Login() {
             type="password"
             name="password"
             placeholder="Password"
+            value={loginData.password}
             onChange={handleChange}
             required
           />
