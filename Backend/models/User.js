@@ -4,20 +4,27 @@ const userSchema = new mongoose.Schema(
   {
     name: {
       type: String,
-      required: true
+      required: [true, "Name is required"],
+      trim: true
     },
     email: {
       type: String,
-      required: true,
-      unique: true
+      required: [true, "Email is required"],
+      unique: true,
+      lowercase: true,
+      trim: true
     },
     password: {
       type: String,
-      required: true
+      required: [true, "Password is required"],
+      minlength: 6 // Professional security standard
     },
     role: {
       type: String,
-      default: "user"
+      // Restrict roles to only these two to match your Register page logic
+      enum: ["user", "admin"], 
+      default: "user",
+      required: true // Now role is strictly required at registration
     }
   },
   { timestamps: true }

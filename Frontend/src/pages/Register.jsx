@@ -12,11 +12,15 @@ function Register() {
     confirmPassword: ""
   });
 
+  // 1. Logic from image_77e29f.png: Initialize role state
+  const [role, setRole] = useState("user"); 
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => { // Added async
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -24,22 +28,24 @@ function Register() {
       return;
     }
 
+    setLoading(true);
+
     try {
-      // Logic from image_b13795.png
+      // 2. Updated API call logic from your screenshots
       const response = await fetch("http://localhost:5000/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           name: formData.name,
           email: formData.email,
-          password: formData.password
+          password: formData.password,
+          role: role // Role is now sent to the backend
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        console.log("Success:", data);
         alert("Registration Successful!");
         navigate("/login");
       } else {
@@ -48,6 +54,8 @@ function Register() {
     } catch (error) {
       console.error("Error connecting to backend:", error);
       alert("Server error. Is your backend running?");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -74,6 +82,16 @@ function Register() {
             onChange={handleChange}
             required
           />
+
+          {/* 3. New Role Selection Dropdown from image_77e29f.png */}
+          <div className="role-selection">
+            <label>Register as:</label>
+            <select value={role} onChange={(e) => setRole(e.target.value)}>
+              <option value="user">Job Seeker (User)</option>
+              <option value="admin">Employer (Admin)</option>
+            </select>
+          </div>
+
           <input
             type="password"
             name="password"
@@ -91,7 +109,9 @@ function Register() {
             required
           />
 
-          <button type="submit">Register</button>
+          <button type="submit" disabled={loading}>
+            {loading ? "Registering..." : "Register"}
+          </button>
         </form>
       </div>
     </section>
